@@ -1,25 +1,18 @@
 {
   "version": 2,
-  "alias": "frontmania",
-  "type": "static",
-  "public": true,
-  "static": {
-    "headers": [
-      {
-        "source": "**/*.@(jpg|jpeg|gif|png)",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "max-age=7200"
-          }
-        ]
-      }
-    ],
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
-  }
+  "name": "storybook-demo",
+  "files": [
+    "storybook-static",
+    "build"
+  ],
+  "routes": [
+    {
+      "src": "/*",
+      "dest": "storybook-static/*"
+    },
+    {
+      "src": "/index.html",
+      "dest": "storybook-static/index.html"
+    }
+  ]
 }
