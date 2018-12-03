@@ -2,8 +2,7 @@
   "version": 2,
   "name": "storybook-demo",
   "files": [
-    "storybook-static",
-    "build"
+    "storybook-static"
   ],
   "routes": [
     {
