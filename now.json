@@ -9,10 +9,6 @@
     {
       "src": "/*",
       "dest": "storybook-static/*"
-    },
-    {
-      "src": "/index.html",
-      "dest": "storybook-static/index.html"
     }
   ]
 }
