@@ -24,19 +24,15 @@ jobs:
       - run: yarn install
 
       - run:
-          name: storing local IP address
-          command: mkdir storybook-static && yarn build:storybook
+          name: Generate storybook
+          command: yarn storybook -p 8081
+          background: true
 
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-      
-      - run: "pwd"
-      - run: "ls -lah"
-      - run: "ls -lah storybook-static" 
-      - run: "cat $(pwd)/storybook-static/index.html" 
-      - run: "cat file://$(pwd)/storybook-static/index.html" 
+
 
       # run tests!
-      - run: "CI=true STORYBOOK_URL=file://$(pwd)/storybook-static yarn test"
+      - run: "CI=true STORYBOOK_URL=http://localhost:8081 yarn test"
