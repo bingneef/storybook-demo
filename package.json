@@ -30,7 +30,7 @@
     "test": "yarn tsc && CI=true react-scripts test",
     "ci:test": "yarn tsc && concurrently -s first --kill-others 'yarn storybook' 'wait-on http-get://localhost:9009 && CI=true react-scripts test'",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9009 -s public",
+    "storybook": "start-storybook -p 9009",
     "build:storybook": "build-storybook -s public",
     "deploy:storybook": "yarn build:storybook && now storybook-static --public",
     "typings": "typings/index",
