@@ -28,6 +28,7 @@
     "dev:test": "react-scripts test",
     "deploy:build": "yarn build && now build --public",
     "test": "yarn tsc && CI=true react-scripts test",
+    "ci:test": "yarn tsc && concurrently -s first --kill-others 'yarn storybook' 'wait-on http-get://localhost:9009 && CI=true react-scripts test'",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build:storybook": "build-storybook -s public",
@@ -53,10 +54,12 @@
     "@storybook/react": "^4.0.9",
     "@types/storybook__react": "^4.0.0",
     "awesome-typescript-loader": "^5.2.1",
+    "concurrently": "^4.1.0",
     "node-sass": "^4.10.0",
     "now": "^12.1.8",
     "react-docgen-typescript-webpack-plugin": "^1.1.0",
     "react-test-renderer": "^16.6.3",
-    "storybook": "^1.0.0"
+    "storybook": "^1.0.0",
+    "wait-on": "^3.2.0"
   }
 }
