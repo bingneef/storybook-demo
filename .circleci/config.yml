@@ -23,10 +23,27 @@ jobs:
 
       - run: yarn install
 
+      - run:
+          name: starting storybook server
+          command: yarn storybook
+          background: true
+
+      - run:
+          name: storing local IP address
+          command: node -p "require('ip').address()" > logs/ip.log
+
+      - run:
+          name: waiting for node server to start
+          command: wget --retry-connrefused --waitretry=2 -t 5 "http://$(cat logs/ip.log):9009" > /dev/null
+      
+      - run:
+          name: log
+          command: cat logs/ip.log
+
       - save_cache:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
         
       # run tests!
-      - run: yarn ci:test
+      - run: CI=true yarn test
