@@ -2,7 +2,7 @@ import initStoryshots from '@storybook/addon-storyshots';
 import { imageSnapshot } from '@storybook/addon-storyshots-puppeteer';
 import devices from 'puppeteer/DeviceDescriptors';
 
-const storybookUrl = 'http://localhost:9009';
+const storybookUrl = 'http://0.0.0.0:9009';
 
 const getScreenshotOptions = ({ _context, _url }) => ({
   fullPage: false,
