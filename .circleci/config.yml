@@ -30,7 +30,7 @@ jobs:
 
       - run:
           name: storing local IP address
-          command: node -p "require('ip').address()" > logs/ip.log
+          command: mkdir logs && node -p "require('ip').address()" > logs/ip.log
 
       - run:
           name: waiting for node server to start
