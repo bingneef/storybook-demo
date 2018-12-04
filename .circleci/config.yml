@@ -31,6 +31,9 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
-        
+      
+      - run: "ls -lah"
+      - run: "ls -lah storybook-static" 
+      
       # run tests!
       - run: "CI=true STORYBOOK_URL=file:/$(pwd)/storybook-static yarn test"
