@@ -46,4 +46,4 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
         
       # run tests!
-      - run: CI=true yarn test
+      - run: "CI=true STORYBOOK_URL=http://$(cat logs/ip.log):9009 yarn test"
