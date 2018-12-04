@@ -33,4 +33,4 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
         
       # run tests!
-      - run: "CI=true STORYBOOK_URL=file://$(pwd)/storybook-static yarn test"
+      - run: "CI=true STORYBOOK_URL=file:/$(pwd)/storybook-static yarn test"
