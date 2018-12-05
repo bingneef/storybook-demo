@@ -28,7 +28,7 @@
     "dev:test": "react-scripts test",
     "deploy:build": "yarn build && now build --public",
     "test": "yarn tsc && react-scripts test",
-    "ci:test": "yarn concurrently -s first --kill-others 'yarn storybook' 'wait-on http-get://localhost:9009 && CI=true yarn test -u'",
+    "ci:test": "yarn concurrently -s first --kill-others 'yarn storybook' 'wait-on http-get://localhost:9009 && CI=true yarn test'",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009",
     "build:storybook": "build-storybook -s public",
