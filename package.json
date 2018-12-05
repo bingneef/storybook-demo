@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "@types/classnames": "^2.2.6",
-    "@types/jest": "^23.3.9",
+    "@types/jest": "^23.3.10",
     "@types/node": "^10.12.10",
     "@types/react": "^16.7.7",
     "@types/react-dom": "^16.0.10",
@@ -26,12 +26,15 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "dev:test": "react-scripts test",
-    "test": "yarn tsc && CI=true react-scripts test",
+    "deploy:build": "yarn build && now build --public",
+    "test": "yarn tsc && react-scripts test",
+    "ci:test": "yarn concurrently -s first --kill-others 'yarn storybook' 'wait-on http-get://localhost:9009 && CI=true yarn test -u'",
     "eject": "react-scripts eject",
-    "storybook": "start-storybook -p 9009 -s public",
+    "storybook": "start-storybook -p 9009",
     "build:storybook": "build-storybook -s public",
     "deploy:storybook": "yarn build:storybook && now storybook-static --public",
-    "typings": "typings/index"
+    "typings": "typings/index",
+    "now-build": "react-scripts build && mv build dist"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -51,10 +54,13 @@
     "@storybook/react": "^4.0.9",
     "@types/storybook__react": "^4.0.0",
     "awesome-typescript-loader": "^5.2.1",
+    "concurrently": "^4.1.0",
     "node-sass": "^4.10.0",
     "now": "^12.1.8",
     "react-docgen-typescript-webpack-plugin": "^1.1.0",
     "react-test-renderer": "^16.6.3",
-    "storybook": "^1.0.0"
+    "serve": "^10.1.1",
+    "storybook": "^1.0.0",
+    "wait-on": "^3.2.0"
   }
 }
