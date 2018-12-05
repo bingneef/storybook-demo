@@ -10,7 +10,7 @@ const getScreenshotOptions = ({ _context, _url }) => ({
 
 const customizePage = page => {
   return Promise.all([
-    // page.emulate(devices['iPhone 6']),
+    page.emulate(devices['iPhone 6']),
     page.addStyleTag({ content: `* { transition-property: none !important; transform: none !important; animation: none !important;` }),
   ]);
 }
