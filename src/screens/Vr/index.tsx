@@ -10,7 +10,13 @@ interface VrProps {
 }
 
 const Vr = (props: VrProps) => {
-  const htmlContent:any = props.kind == 'video' ? videoHtml : sceneHtml;
+  let htmlContent:string = sceneHtml;
+  switch (props.kind) {
+    case 'video':
+      htmlContent = videoHtml;
+      break;
+  }
+
   return <ReactHtml html={htmlContent} />;
 };
 
