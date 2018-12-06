@@ -2,7 +2,7 @@ version: "3.2"
 services:
   storybook:
     container_name: frontmania_storybook
-    image: node:8-slim
+    image: node:8-alpine
     working_dir: '/app'
     volumes:
       - .:/app
