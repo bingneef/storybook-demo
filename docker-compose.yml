@@ -1,17 +1,16 @@
 version: "3.2"
 services:
   storybook:
-    container_name: storybook
-    build:
-      context: .
-      dockerfile: ./storybook.Dockerfile
+    image: node:8-slim
+    working_dir: '/app'
     volumes:
       - .:/app
       - /app/node_modules
     ports:
       - '19009:9009'
     command: >
-      sh -c "yarn storybook -h 0.0.0.0"
+      sh -c "yarn install && yarn storybook -h 0.0.0.0 --ci"
+  
   test:
     container_name: test
     build:
