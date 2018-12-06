@@ -1,0 +1,22 @@
+version: "3.2"
+services:
+  storybook:
+    container_name: storybook
+    build:
+      context: .
+      dockerfile: ./storybook.Dockerfile
+    ports:
+      - '19009:9009'
+    command: >
+      sh -c "yarn storybook --ci"
+  test:
+    container_name: test
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - ./src/__tests__/snapshots/__image_snapshots__:/app/src/__tests__/snapshots/__image_snapshots__
+    depends_on:
+      - storybook
+    command: >
+      sh -c "yarn docker:test -u"

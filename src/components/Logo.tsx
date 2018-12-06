@@ -1,6 +1,6 @@
 import React, { memo } from 'react';
 interface LogoProps {
-  title: string | null,
+  title?: string,
 }
 
 const Logo = (props: LogoProps) => {

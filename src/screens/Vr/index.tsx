@@ -3,14 +3,13 @@ import ReactHtml from 'raw-html-react';
 import 'aframe';
 
 import sceneHtml from './scene.js';
-import videoHtml from './video.js';
 
 interface VrProps {
   kind: string,
 }
 
 const Vr = (props: VrProps) => {
-  const htmlContent:any = props.kind == 'video' ? videoHtml : sceneHtml;
+  const htmlContent:string = sceneHtml;
   return <ReactHtml html={htmlContent} />;
 };
 

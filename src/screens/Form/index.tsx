@@ -1,4 +1,5 @@
 import React, { memo } from 'react';
+import Button from '../../components/buttons/index'
 
 interface FormProps {
 }
@@ -19,18 +20,13 @@ const Form = (props:FormProps) => {
             <label>Password</label>
             <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
         </div>
-        <div className="form-group">
-          <label>File input</label>
-          <input type="file" id="exampleInputFile" />
-          <p className="help-block">Example block-level help text here.</p>
-        </div>
         <div className="checkbox">
           <label>
             <input type="checkbox" />
             Check me out
           </label>
         </div>
-        <button type="submit" className="btn btn-default">Submit</button>
+        <Button type='primary' title='submit' />
       </form>
     </div>
   );
