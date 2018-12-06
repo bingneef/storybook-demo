@@ -2,30 +2,33 @@ import React, { Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
 
 import Button from '../../../components/buttons/index.tsx';
+import { ContainerHoc } from '../../helpers/container-hoc';
 
-storiesOf('Button/default', module)
+const WrappedButton = ContainerHoc(Button);
+
+storiesOf('Button', module)
   .add('Default', () => (
     <Fragment>
-      <div className="component-section">
-        <Button title="Default" type="default" />
-      </div>
-      <div className="component-section">
-        <Button title="Primary" type="primary" />
-      </div>
-      <div className="component-section">
-        <Button title="Success" type="success" />
-      </div>
-      <div className="component-section">
-        <Button title="Info" type="info" />
-      </div>
-      <div className="component-section">
-        <Button title="Warning" type="warning" />
-      </div>
-      <div className="component-section">
-        <Button title="Danger" type="danger" />
-      </div>
-      <div className="component-section">
-        <Button title="Link" type="link" />
-      </div>
+      <WrappedButton title="Primary" type="primary" />
+      <WrappedButton title="Secondary" type="secondary" />
+      <WrappedButton title="Success" type="success" />
+      <WrappedButton title="Danger" type="danger" />
+      <WrappedButton title="Warning" type="warning" />
+      <WrappedButton title="Info" type="info" />
+      <WrappedButton title="Light" type="light" />
+      <WrappedButton title="Dark" type="dark" />
+      <WrappedButton title="Link" type="link" />
+    </Fragment>
+  ))
+  .add('Outline', () => (
+    <Fragment>
+      <WrappedButton title="Primary" outline type="primary" />
+      <WrappedButton title="Secondary" outline type="secondary" />
+      <WrappedButton title="Success" outline type="success" />
+      <WrappedButton title="Danger" outline type="danger" />
+      <WrappedButton title="Warning" outline type="warning" />
+      <WrappedButton title="Info" outline type="info" />
+      <WrappedButton title="Light" outline type="light" />
+      <WrappedButton title="Dark" outline type="dark" />
     </Fragment>
   ));
