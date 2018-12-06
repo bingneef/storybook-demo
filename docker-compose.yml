@@ -11,12 +11,14 @@ services:
     ports:
       - '19009:9009'
     command: >
-      sh -c "yarn storybook --ci"
+      sh -c "yarn storybook -h 0.0.0.0"
   test:
     container_name: test
     build:
       context: .
       dockerfile: ./Dockerfile
+    links:
+      - "storybook:storybook"
     volumes:
       - .:/app
       - /app/node_modules
