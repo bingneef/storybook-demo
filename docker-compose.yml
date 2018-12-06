@@ -5,6 +5,8 @@ services:
     build:
       context: .
       dockerfile: ./storybook.Dockerfile
+    volumes:
+      - .:/usr/src/app
     ports:
       - '19009:9009'
     command: >
@@ -19,4 +21,4 @@ services:
     depends_on:
       - storybook
     command: >
-      sh -c "yarn docker:test -u"
+      sh -c "yarn docker:test"
