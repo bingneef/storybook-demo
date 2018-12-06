@@ -9,7 +9,7 @@ cache:
   directories:
     - node_modules
     - $HOME/docker
-    - ~/.npm
+    - ~/.yarn
     - ~/.cache
 
 before_install:
@@ -19,6 +19,9 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
   # Load cached docker images
   - if [[ -d $HOME/docker ]]; then ls $HOME/docker/*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi
+
+before_script:
+  - docker-compose build
 
 services:
   - docker
@@ -34,5 +37,5 @@ after_script:
 before_cache:
   # Save tagged docker images
   - >
-    mkdir -p $HOME/docker && docker images -a --filter='reference=*cypress*' --filter='dangling=false' --format '{{.Repository}}:{{.Tag}} {{.ID}}'
+    mkdir -p $HOME/docker && docker images -a --filter='reference=*frontmania*' --filter='dangling=false' --format '{{.Repository}}:{{.Tag}} {{.ID}}'
     | xargs -n 2 -t sh -c 'test -e $HOME/docker/$1.tar.gz || docker save $0 | gzip -2 > $HOME/docker/$1.tar.gz'
