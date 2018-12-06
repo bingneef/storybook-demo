@@ -14,9 +14,7 @@ services:
   
   test:
     container_name: frontmania_test
-    build:
-      context: .
-      dockerfile: ./Dockerfile
+    image: bingneef/jstest
     links:
       - "storybook:storybook"
     volumes:

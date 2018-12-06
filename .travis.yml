@@ -7,10 +7,10 @@ env:
 
 cache:
   directories:
-    - app/node_modules
     - $HOME/docker
-    - ~/.yarn
-    - ~/.cache
+    - $HOME/.npm
+    - $HOME/.yarn
+    - $HOME/.cache
 
 before_install:
   - sudo rm /usr/local/bin/docker-compose
