@@ -5,18 +5,24 @@ services:
     build:
       context: .
       dockerfile: ./storybook.Dockerfile
+    volumes:
+      - .:/app
+      - /app/node_modules
     ports:
       - '19009:9009'
     command: >
-      sh -c "yarn storybook --ci"
+      sh -c "yarn storybook -h 0.0.0.0"
   test:
     container_name: test
     build:
       context: .
       dockerfile: ./Dockerfile
+    links:
+      - "storybook:storybook"
     volumes:
+      - .:/app
+      - /app/node_modules
       - ./src/__tests__/snapshots/__image_snapshots__:/app/src/__tests__/snapshots/__image_snapshots__
     depends_on:
       - storybook
-    command: >
-      sh -c "yarn docker:test -u"
+    command: sh -c "yarn docker:test"
