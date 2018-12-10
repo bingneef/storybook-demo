@@ -17,14 +17,14 @@ services:
     image: bingneef/jstest
     working_dir: /app
     links:
-      # - storybook:storybook
+      - storybook:storybook
       - static_build:static_build
     volumes:
       - .:/app
       - ./docker/data/node_modules:/app/node_modules
       - ./src/__tests__/snapshots/__image_snapshots__:/app/src/__tests__/snapshots/__image_snapshots__
     depends_on:
-      # - storybook
+      - storybook
       - static_build
     command: sh -c "yarn install && yarn docker:test:integration"
   
