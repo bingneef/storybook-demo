@@ -6,7 +6,7 @@ services:
     working_dir: /app
     volumes:
       - .:/app
-      - ./docker/data/storybook/node_modules:/app/node_modules
+      - /app/node_modules
     ports:
       - '19009:9009'
     command: >
@@ -22,7 +22,7 @@ services:
       - static_build:static_build
     volumes:
       - .:/app
-      - ./docker/data/test/node_modules:/app/node_modules
+      - /app/node_modules
       - ./src/__tests__/snapshots/__image_snapshots__:/app/src/__tests__/snapshots/__image_snapshots__
     depends_on:
       - storybook
@@ -38,8 +38,8 @@ services:
     working_dir: /app
     volumes:
       - .:/app
-      - ./docker/data/static_build/node_modules:/app/node_modules
-      - ./docker/data/build:/app/build
+      - /app/node_modules
+      - /app/build
     ports:
       - '15000:5000'
     command: >
@@ -53,7 +53,7 @@ services:
     working_dir: /app
     volumes:
       - .:/app
-      - ./docker/data/node_modules:/app/node_modules
+      - /app/node_modules
     ports:
       - '13000:3000'
     command: >
