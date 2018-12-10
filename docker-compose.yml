@@ -28,8 +28,8 @@ services:
       - storybook
       - static_build
     command: >
-      sh -c "yarn install;
-      yarn docker:test;
+      sh -c "yarn install &&
+      yarn docker:test &&
       yarn docker:test:integration"
   
   static_build:
@@ -43,8 +43,8 @@ services:
     ports:
       - '15000:5000'
     command: >
-      sh -c "yarn install;
-      yarn build;
+      sh -c "yarn install &&
+      yarn build &&
       yarn serve build"
   
   app:
@@ -57,5 +57,5 @@ services:
     ports:
       - '13000:3000'
     command: >
-      sh -c "yarn install;
+      sh -c "yarn install &&
       yarn start"

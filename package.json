@@ -28,7 +28,7 @@
     "docker:test:integration": "yarn wait-on -l http-get://static_build:5000 && APP_URL=http://static_build:5000 yarn test:integration",
     "ci:test": "yarn wait-on -l http-get://storybook:9009 && CI=true STORYBOOK_URL=http://storybook:9009 yarn test",
     "ci:test:integration": "yarn wait-on -l http-get://static_build:5000 && CI=true APP_URL=http://static_build:5000 yarn test:integration",
-    "ci:test:full": "yarn ci:test; yarn ci:test:integration",
+    "ci:test:full": "yarn ci:test && yarn ci:test:integration",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 9009",
     "build:storybook": "build-storybook -s public",
