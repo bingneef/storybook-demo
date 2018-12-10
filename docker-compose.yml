@@ -6,11 +6,12 @@ services:
     working_dir: /app
     volumes:
       - .:/app
-      - ./docker/data/node_modules:/app/node_modules
+      - ./docker/data/storybook/node_modules:/app/node_modules
     ports:
       - '19009:9009'
     command: >
-      sh -c "yarn install && yarn storybook -h 0.0.0.0 --ci"
+      sh -c "yarn install; 
+      yarn storybook -h 0.0.0.0 --ci"
   
   test:
     container_name: frontmania_test
@@ -21,12 +22,15 @@ services:
       - static_build:static_build
     volumes:
       - .:/app
-      - ./docker/data/node_modules:/app/node_modules
+      - ./docker/data/test/node_modules:/app/node_modules
       - ./src/__tests__/snapshots/__image_snapshots__:/app/src/__tests__/snapshots/__image_snapshots__
     depends_on:
       - storybook
       - static_build
-    command: sh -c "yarn install && yarn docker:test && yarn docker:test:integration"
+    command: >
+      sh -c "yarn install;
+      yarn docker:test;
+      yarn docker:test:integration"
   
   static_build:
     container_name: frontmania_static_build
@@ -34,11 +38,14 @@ services:
     working_dir: /app
     volumes:
       - .:/app
-      - ./docker/data/node_modules:/app/node_modules
+      - ./docker/data/static_build/node_modules:/app/node_modules
       - ./docker/data/build:/app/build
     ports:
       - '15000:5000'
-    command: sh -c "yarn install && yarn build && yarn serve build"
+    command: >
+      sh -c "yarn install;
+      yarn build;
+      yarn serve build"
   
   app:
     container_name: frontmania_app
@@ -50,4 +57,5 @@ services:
     ports:
       - '13000:3000'
     command: >
-      sh -c "yarn install && yarn start"
+      sh -c "yarn install;
+      yarn start"
