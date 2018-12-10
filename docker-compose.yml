@@ -26,7 +26,7 @@ services:
     depends_on:
       - storybook
       - static_build
-    command: sh -c "yarn install && yarn docker:test:integration"
+    command: sh -c "yarn install && yarn docker:test && yarn docker:test:integration"
   
   static_build:
     container_name: frontmania_static_build
