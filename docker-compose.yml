@@ -2,11 +2,11 @@ version: "3.2"
 services:
   storybook:
     container_name: frontmania_storybook
-    image: node:8-alpine
-    working_dir: '/app'
+    image: node:8-slim
+    working_dir: /app
     volumes:
       - .:/app
-      - /app/node_modules
+      - ./docker/data/node_modules:/app/node_modules
     ports:
       - '19009:9009'
     command: >
@@ -15,12 +15,39 @@ services:
   test:
     container_name: frontmania_test
     image: bingneef/jstest
+    working_dir: /app
     links:
-      - "storybook:storybook"
+      # - storybook:storybook
+      - static_build:static_build
     volumes:
       - .:/app
-      - /app/node_modules
+      - ./docker/data/node_modules:/app/node_modules
       - ./src/__tests__/snapshots/__image_snapshots__:/app/src/__tests__/snapshots/__image_snapshots__
     depends_on:
-      - storybook
-    command: sh -c "yarn docker:test"
+      # - storybook
+      - static_build
+    command: sh -c "yarn install && yarn docker:test:integration"
+  
+  static_build:
+    container_name: frontmania_static_build
+    image: node:8-slim
+    working_dir: /app
+    volumes:
+      - .:/app
+      - ./docker/data/node_modules:/app/node_modules
+      - ./docker/data/build:/app/build
+    ports:
+      - '15000:5000'
+    command: sh -c "yarn install && yarn build && yarn serve build"
+  
+  app:
+    container_name: frontmania_app
+    image: node:8-slim
+    working_dir: /app
+    volumes:
+      - .:/app
+      - ./docker/data/node_modules:/app/node_modules
+    ports:
+      - '13000:3000'
+    command: >
+      sh -c "yarn install && yarn start"
