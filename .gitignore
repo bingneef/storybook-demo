@@ -25,5 +25,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Ignore large files 
-360-vr.mp4
+# Docker cache
+/docker/data

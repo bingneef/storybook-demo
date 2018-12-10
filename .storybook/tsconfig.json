@@ -4,5 +4,9 @@
     "jsx": "react",
     "isolatedModules": false,
     "noEmit": false
-  }
+  },
+  "lib": [
+    "es2018",
+    "dom"
+  ]
 }

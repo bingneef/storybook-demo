@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { storiesOf } from '@storybook/react';
 
-import Button from '../../../components/buttons/index.tsx';
+import Button from '../../../components/buttons/index';
 import { ContainerHoc } from '../../helpers/container-hoc';
 
 const WrappedButton = ContainerHoc(Button);
