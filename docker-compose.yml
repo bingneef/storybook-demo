@@ -10,7 +10,7 @@ services:
     ports:
       - '19009:9009'
     command: >
-      sh -c "yarn install; 
+      sh -c "yarn install && 
       yarn storybook -h 0.0.0.0 --ci"
   
   test:
