@@ -27,3 +27,5 @@ yarn-error.log*
 
 # Docker cache
 /docker/data
+
+/webvr/**/assets/*
