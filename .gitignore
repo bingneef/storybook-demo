@@ -28,4 +28,5 @@ yarn-error.log*
 # Docker cache
 /docker/data
 
+# Big VR assets
 /webvr/**/assets/*
