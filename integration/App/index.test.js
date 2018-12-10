@@ -1,6 +1,6 @@
 /* global page */
 
-describe('app', () => {
+describe('App', () => {
   beforeEach(async () => {
     await page.goto(process.env.APP_URL)
     await page.waitFor('[data-testid="AppRoot"]');
@@ -12,5 +12,7 @@ describe('app', () => {
     await expect(page).not.toMatchElement(codeTag);
     await expect(page).toClick('.App-brand')
     await expect(page).toMatchElement(codeTag);
+    await expect(page).toClick('.App-brand')
+    await expect(page).not.toMatchElement(codeTag);
   }, 10000)
 })
