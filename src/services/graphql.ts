@@ -1,8 +1,9 @@
 import ApolloClient from 'apollo-boost';
 import queryString from 'query-string';
+import constants from '../config';
 
 export const client = new ApolloClient({
-  uri: 'http://104.248.205.188:4201/api',
+  uri: constants.apiUrl,
   headers: {
     testid: queryString.parse(window.location.search).testid,
   },
