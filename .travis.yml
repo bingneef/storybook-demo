@@ -25,7 +25,7 @@ services:
 install:
 - yarn
 script:
-- docker-compose run --rm -e CI=true --service-ports test
+- docker-compose run --rm -e CI=true --service-ports app_test
 after_script:
 - docker-compose down
 before_cache:
