@@ -10,22 +10,7 @@ describe('#dataLoaders', () => {
   test('add dataLoaders to ctx', async () => {
     let ctx = {};
     const dataLoaderKeys = [
-      'userByToken',
-      'userById',
-      'userWeddingById',
-      'userWeddingsByWeddingId',
-      'myUserWeddingByWeddingId',
-      'weddingById',
-      'programmeById',
-      'programmesByWeddingId',
-      'infoById',
-      'infosByWeddingId',
-      'newsItemById',
-      'newsItemsByWeddingId',
-      'weddingRoleByToken',
-      'attendanceById',
-      'myAttendanceByProgrammeId',
-      'attendancesByProgrammeId',
+      'teamById',
     ]
     await dataLoaders(ctx, jest.fn())
 

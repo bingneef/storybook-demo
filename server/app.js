@@ -12,22 +12,22 @@ import { execute, subscribe } from 'graphql'
 import { createServer } from 'http'
 import { SubscriptionServer } from 'subscriptions-transport-ws'
 import { addMockFunctionsToSchema, MockList } from 'graphql-tools';
-import schema from './services/graphql/schema/index'
+import schema from './src/services/graphql/schema/index'
 
-import constants from './config/constants'
-import logger from './services/logger'
+import constants from './src/config/constants'
+import logger from './src/services/logger'
 
-import router from './router'
-import sessionRouter from './router/session'
-import servicesRouter from './router/services'
+import router from './src/router'
+import sessionRouter from './src/router/session'
+import servicesRouter from './src/router/services'
 
-import AuthenticationMiddleware from './middleware/authentication'
-import DataLoadersMiddleware from './middleware/dataLoaders'
-import MockMiddleware from './middleware/mock'
+import AuthenticationMiddleware from './src/middleware/authentication'
+import DataLoadersMiddleware from './src/middleware/dataLoaders'
+import MockMiddleware from './src/middleware/mock'
 
-import { initCron } from './cron'
-import { initSentry } from './services/sentry'
-import { User } from './models';
+import { initCron } from './src/cron'
+import { initSentry } from './src/services/sentry'
+import { User } from './src/models';
 
 const serverPort = constants.serverPort
 const app = new Koa()

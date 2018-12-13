@@ -4,8 +4,9 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "docker": "docker-compose run --rm --service-ports web",
     "start": "yarn nodemon ./app.js --exec babel-node -e js",
+    "docker": "docker-compose run --rm --service-ports web",
+    "test": "jest -i",
     "db:seed": "yarn babel-node db/seeds.js --exec babel-node",
     "runner": "yarn babel-node db/runner.js --exec babel-node"
   },

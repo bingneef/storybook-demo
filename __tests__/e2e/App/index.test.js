@@ -40,8 +40,7 @@ describe('App', () => {
       await page.waitFor('[data-testid="AppRoot"]');
 
       items = await page.$$(testTag);
-      expect(items.length).toEqual(1);  
-
+      expect(items.length).toEqual(1);
     })
 
     page.goto(process.env.APP_URL)

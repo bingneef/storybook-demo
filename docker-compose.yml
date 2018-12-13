@@ -1,5 +1,19 @@
 version: '3.5'
 services:
+  e2e_test:
+    container_name: frontmania_app_test
+    image: bingneef/jstest
+    links:
+      - mock_build:mock_build
+      - mock_server:mock_server
+    depends_on:
+      - mock_build
+      - mock_server
+    environment:
+      - CI=true
+    command: >
+      sh -c "yarn install &&
+      yarn docker:test:integration"
   # App
   app_base: &app_base
     build:
@@ -29,17 +43,13 @@ services:
     image: bingneef/jstest
     links:
       - storybook:storybook
-      - mock_build:mock_build
-      - mock_server:mock_server
     depends_on:
       - storybook
-      - mock_build
-      - mock_server
     environment:
       - CI=true
     command: >
       sh -c "yarn install &&
-      yarn docker:test:full"
+      yarn docker:test"
   
   mock_build:
     <<: *app_base
@@ -150,6 +160,8 @@ services:
 
   server_test:
     <<: *server_base
-    command: yarn test
+    command: >
+      sh -c "yarn install &&
+      yarn test"
     environment:
       SKIP_COVERAGE: null
