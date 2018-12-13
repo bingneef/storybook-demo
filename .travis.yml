@@ -4,7 +4,6 @@ node_js:
 dist: trusty
 env:
   - DOCKER_COMPOSE_VERSION=1.23.2
-  - CI=true
 cache:
   directories:
   - "$HOME/docker"
@@ -26,7 +25,7 @@ services:
 install:
 - yarn
 script:
-- docker-compose run --rm --service-ports test yarn ci:test:full
+- docker-compose run --rm -e CI=true --service-ports test
 after_script:
 - docker-compose down
 before_cache:
