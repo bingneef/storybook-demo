@@ -1,0 +1,62 @@
+version: "3.2"
+services:
+  storybook:
+    container_name: frontmania_storybook
+    image: node:8-slim
+    working_dir: /app
+    volumes:
+      - .:/app
+      - ./docker/data/storybook/node_modules:/app/node_modules
+    ports:
+      - '19009:9009'
+    command: >
+      sh -c "yarn install && 
+      yarn storybook -h 0.0.0.0 --ci"
+  
+  test:
+    container_name: frontmania_test
+    image: bingneef/jstest
+    working_dir: /app
+    links:
+      - storybook:storybook
+      - mock_build:mock_build
+    volumes:
+      - .:/app
+      - ./docker/data/test/node_modules:/app/node_modules
+    depends_on:
+      - storybook
+      - mock_build
+    command: >
+      sh -c "yarn install &&
+      yarn docker:test && 
+      yarn docker:test:integration"
+  
+  mock_build:
+    container_name: frontmania_mock_build
+    image: node:8-slim
+    working_dir: /app
+    volumes:
+      - .:/app
+      - ./docker/data/mock_build/node_modules:/app/node_modules
+      - /app/build
+    environment:
+      - REACT_APP_MOCK_API=true
+    ports:
+      - '15000:5000'
+    command: >
+      sh -c "yarn install &&
+      yarn build &&
+      yarn serve build --single"
+  
+  app:
+    container_name: frontmania_app
+    image: node:8-slim
+    working_dir: /app
+    volumes:
+      - .:/app
+      - ./docker/data/app/node_modules:/app/node_modules
+    ports:
+      - '13000:3000'
+    command: >
+      sh -c "yarn install &&
+      yarn start"

@@ -1,9 +1,10 @@
 language: node_js
 node_js:
-- '8'
+  - '8'
 dist: trusty
 env:
-- DOCKER_COMPOSE_VERSION=1.23.2
+  - DOCKER_COMPOSE_VERSION=1.23.2
+  - CI=true
 cache:
   directories:
   - "$HOME/docker"
