@@ -1,8 +1,14 @@
 version: '3.5'
 services:
+  # E2E
   e2e_test:
-    container_name: frontmania_app_test
-    image: bingneef/jstest
+    container_name: frontmania_e2e_test
+    build:
+      context: ./src
+      dockerfile: ./e2e.Dockerfile
+    volumes:
+      # - ./src:/app
+      - /app/node_modules
     links:
       - mock_build:mock_build
       - mock_server:mock_server
@@ -67,9 +73,10 @@ services:
     <<: *app_base
     container_name: frontmania_app
     ports:
-      - '13000:3000'
+      - 13000:3000
     depends_on:
       - storybook
+      - server
     command: >
       sh -c "yarn install &&
       yarn start"
@@ -133,12 +140,12 @@ services:
       yarn start"
     environment:
       - DOCKER_ENV=true
-      - PORT=4200
+      - PORT=4000
     volumes:
-      - ./server:/app
-      - ./docker/data/server/node_modules:/app/node_modules
+      - ./server:/app:cached
+      - /app/node_modules
     ports:
-      - "4200:4200"
+      - "4000:4000"
     depends_on:
       - elasticsearch
       - mongodb
@@ -165,3 +172,5 @@ services:
       yarn test"
     environment:
       SKIP_COVERAGE: null
+volumes:
+  e2e_node_modules:

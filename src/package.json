@@ -7,7 +7,7 @@
   },
   "scripts": {
     "test:integration": "jest -c __tests__/e2e/jest.config.js",
-    "docker:test:integration": "yarn wait-on -l http-get://mock_build:5000 && APP_URL=http://mock_build:5000 yarn test:integration"
+    "docker:test:integration": "yarn wait-on -l http-get://mock_build:5000 && yarn wait-on -l http-get://mock_server:4201/status && APP_URL=http://mock_build:5000 yarn test:integration"
   },
   "devDependencies": {
     "jest-puppeteer": "^3.6.0",

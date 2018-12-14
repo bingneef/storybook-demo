@@ -14,6 +14,7 @@ const unauthorised = {
 }
 
 module.exports = async (ctx, next) => {
+  console.log(ctx.req.body);
   try {
     const token = ctx.query.token || ctx.request.header['x-auth-token']
     if (token) {

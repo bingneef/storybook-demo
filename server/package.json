@@ -7,8 +7,8 @@
     "start": "yarn nodemon ./app.js --exec babel-node -e js",
     "docker": "docker-compose run --rm --service-ports web",
     "test": "jest -i",
-    "db:seed": "yarn babel-node db/seeds.js --exec babel-node",
-    "runner": "yarn babel-node db/runner.js --exec babel-node"
+    "db:seed": "yarn babel-node src/db/seeds.js --exec babel-node",
+    "runner": "yarn babel-node src/db/runner.js --exec babel-node"
   },
   "dependencies": {
     "@babel/cli": "^7.0.0",

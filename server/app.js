@@ -14,6 +14,7 @@ import { SubscriptionServer } from 'subscriptions-transport-ws'
 import { addMockFunctionsToSchema, MockList } from 'graphql-tools';
 import schema from './src/services/graphql/schema/index'
 
+console.log('test');
 import constants from './src/config/constants'
 import logger from './src/services/logger'
 
@@ -25,7 +26,7 @@ import AuthenticationMiddleware from './src/middleware/authentication'
 import DataLoadersMiddleware from './src/middleware/dataLoaders'
 import MockMiddleware from './src/middleware/mock'
 
-import { initCron } from './src/cron'
+import { initCron } from './cron'
 import { initSentry } from './src/services/sentry'
 import { User } from './src/models';
 

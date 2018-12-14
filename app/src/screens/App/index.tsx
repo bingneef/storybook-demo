@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import classNames from 'classnames';
-import { graphql } from 'react-apollo';
+import { graphql, ChildProps } from 'react-apollo';
 import gql from 'graphql-tag';
 
 import logo from '../../assets/images/sping-logo.png';
@@ -22,7 +22,7 @@ type Response = {
   loading: boolean;
 };
 
-export const App: React.SFC<any> = props => {
+export const App = (props: ChildProps & AppProps) => {
   const [highlight, setHighlight] = useState(false);
 
   if (props.data.loading) {
@@ -46,7 +46,7 @@ export const App: React.SFC<any> = props => {
         { highlight ? (
           <h3 className="App-slogan">Partner voor <code data-testid='digital-code'>digitale</code> productinnovatie</h3>
         ) : (
-          <h3 className="App-slogan">Partner voor digitale productinnovatie</h3>
+          <h3 className="App-slogan">Partner voor digital productinnovatie</h3>
         )}
 
         {
@@ -66,4 +66,4 @@ const TEAMS_QUERY = gql`
   }
 `;
 
-export default graphql<{}, Response, AppProps>(TEAMS_QUERY, {})(App);
+export default graphql<AppProps, Response>(TEAMS_QUERY, {})(App);

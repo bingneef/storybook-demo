@@ -5,7 +5,7 @@ interface Constants {
 
 const development = {
   env: 'development',
-  apiUrl: 'http://localhost:4000',
+  apiUrl: 'http://localhost:4000/api',
 };
 
 const mock = {
@@ -17,7 +17,7 @@ const mock = {
 const production = {
   ...development,
   env: 'production',
-  apiUrl: 'http://localhost:4000',
+  apiUrl: 'http://localhost:4000/api',
 }
 
 const test = {
@@ -32,5 +32,7 @@ const environments: { [key: string]: Constants } = {
 };
 
 const key = process.env.REACT_APP_MOCK_API === 'true' ? 'mock' : process.env.NODE_ENV;
+
+console.log(key);
 
 export default environments[key] || environments.development;

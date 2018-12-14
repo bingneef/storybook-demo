@@ -21,7 +21,7 @@ describe('App', () => {
 
     it('Should show digital-code item when clicking .App-brand', async () => {  
       const testTag = '[data-testid="digital-code"]';
-  
+
       await expect(page).not.toMatchElement(testTag);
       await expect(page).toClick('.App-brand')
       await expect(page).toMatchElement(testTag);
