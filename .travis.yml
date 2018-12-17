@@ -28,18 +28,13 @@ install:
 
 jobs:
   include:
-    - stage: pre_build
-      script: docker-compose build
-      script: docker-compose up -d server app mock_build mock_server
-
     - stage: test
-      script: "docker-compose run -e CI=true e2e_test"
-      script: "docker-compose run -e CI=true app_test"
-      script: "docker-compose run -e CI=true server_test"
-      script: "docker-compose run -e CI=true cypress"
-
-    - stage: after_build
-      script: docker-compose down
+      script: docker-compose build
+    - script: docker-compose up -d server app mock_build mock_server
+    - script: "docker-compose run -e CI=true e2e_test"
+    - script: "docker-compose run -e CI=true app_test"
+    - script: "docker-compose run -e CI=true server_test"
+    - script: "docker-compose run -e CI=true cypress"
 
 before_cache:
   - mkdir -p $HOME/docker && docker images -a --filter='reference=*frontmania*' --filter='dangling=false'
