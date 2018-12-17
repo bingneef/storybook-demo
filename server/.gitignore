@@ -1,0 +1,10 @@
+node_modules
+docker/data
+log/*.log
+app.json
+tmp
+data/**
+public/assets/**
+.env
+yarn-error.log
+dist
