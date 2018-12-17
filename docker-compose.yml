@@ -24,8 +24,9 @@ services:
 
   e2e_test:
     container_name: frontmania_e2e_test
-    image: bingneef/jstest
-    working_dir: /src
+    build:
+      context: ./src
+      dockerfile: ./e2e.Dockerfile
     volumes:
       # - ./src:/app
       - /app/node_modules
