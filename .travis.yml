@@ -6,6 +6,7 @@ env:
   - TEST_SUITE=e2e_test
   - TEST_SUITE=app_test
   - TEST_SUITE=server_test
+  - TEST_SUITE=cypress
 cache:
   directories:
   - "$HOME/docker"
