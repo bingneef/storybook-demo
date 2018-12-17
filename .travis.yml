@@ -1,17 +1,17 @@
 language: node_js
+
 node_js:
   - '8'
+
 dist: trusty
-env:
-  - TEST_SUITE=e2e_test
-  - TEST_SUITE=app_test
-  - TEST_SUITE=server_test
+
 cache:
   directories:
   - "$HOME/docker"
   - "$HOME/.npm"
   - "$HOME/.yarn"
   - "$HOME/.cache"
+
 before_install:
   - sudo rm /usr/local/bin/docker-compose
   - curl -L https://github.com/docker/compose/releases/download/1.23.2/docker-compose-`uname -s`-`uname -m` > docker-compose
@@ -19,19 +19,37 @@ before_install:
   - sudo mv docker-compose /usr/local/bin
   # Load cached docker images
   - if [[ -d $HOME/docker ]]; then ls $HOME/docker/*.tar.gz | xargs -I {file} sh -c "zcat {file} | docker load"; fi
-before_script:
-  - docker-compose build
+
 services:
   - docker
+
 install:
   - yarn
-script: "docker-compose run -e CI=true $TEST_SUITE"
-after_script:
-  - docker-compose down
+
+jobs:
+  include:
+    # - stage: build docker image
+    #   script:
+    #   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    #   - docker-compose build
+    #   - docker images
+    #   - docker tag frontmania_app $DOCKER_USERNAME/frontmania_app
+    #   - docker push $DOCKER_USERNAME/frontmania_app
+    - stage: test
+      script: "docker-compose run -e CI=true e2e_test"
+      name: "e2e_test"
+    - script: "docker-compose run -e CI=true app_test"
+      name: "app_test"
+    - script: "docker-compose run -e CI=true server_test"
+      name: "server_test"  
+    - script: "docker-compose run -e CI=true cypress"
+      name: "cypress"  
+
 before_cache:
   - mkdir -p $HOME/docker && docker images -a --filter='reference=*frontmania*' --filter='dangling=false'
     --format '{{.Repository}}:{{.Tag}} {{.ID}}' | xargs -n 2 -t sh -c 'test -e $HOME/docker/$1.tar.gz
     || docker save $0 | gzip -2 > $HOME/docker/$1.tar.gz'
+
 notifications:
   slack:
     secure: b5mTCwSD5eFUM1w3gydB68xonjwfugHyy3nhFCB2FF5MMdJMMMdmCcmkenfSw2vwvMV8UgTn6xTrhz6NOmluTv9W0BVcFMd/rZxWeOfBJdLdUPtjgsJrPjdOgKJa2bnnTGWVSqebZBXMglvSYnL6ExUdZSd7yTzMPHc8sI2TvQV64n2znJV7KeqjmJBpGylTjeW6ZX+M/ua9Zve9kBWXnZLFtaU6LVbH13w5LIRrdGbvBodoDFyQYAuY2pl9K21GuKcKP/JFV2CuGI/6HBxtFri/x9Po7T7Ml4MBCOyLi0aw/2ZqxFvzVQts3vTz0EHPErbDbYC5vBAk08o5c+z3Z9Z+6zEqYN/Pb1v2JiAR3g5lzlwafBG3e8C7Q3vXNpfTOGGQr/meo+TkG9v2n59hzeO7pk/4Gaxi2eBJpmVx6fCnEXAriXt0vle0Ah8yHUWt/YmrpbNTQMYQvcz7ffEwqKjSy/BmI4U3u/ZaiK0xls1sgy2xcdAZew+tnoS3B1zxxW+2GN1lGDMDNjn3moahuoJGS8y7270tP1Vk3XH16lyil1NGLk6RqvuIIEIJ2IrrOe34YVI5QKz+EwnQneWR1M3xk1osGTP/lunfxe+FQIx+sXVXu6TfXCG5UPd0L1S0upDBN2uzkwpYbILWQp3cyPpWFe1fb1HWZQDCfvbMphc=

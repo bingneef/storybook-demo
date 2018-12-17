@@ -3,11 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "cypress": "^3.1.3",
     "react-scripts": "2.1.1"
   },
   "scripts": {
+    "waiton:mocks": "yarn wait-on -l http-get://mock_build:5000 && yarn wait-on -l http-get://mock_server:4201/status",
     "test:integration": "jest -c __tests__/e2e/jest.config.js",
-    "docker:test:integration": "yarn wait-on -l http-get://mock_build:5000 && yarn wait-on -l http-get://mock_server:4201/status && APP_URL=http://mock_build:5000 yarn test:integration"
+    "test:cypress": "cypress run",
+    "docker:test:integration": "yarn waiton:mocks && APP_URL=http://mock_build:5000 yarn test:integration",
+    "docker:test:cypress": "yarn waiton:mocks && yarn test:cypress"
   },
   "devDependencies": {
     "jest-puppeteer": "^3.6.0",
