@@ -37,9 +37,13 @@ jobs:
     #   - docker push $DOCKER_USERNAME/frontmania_app
     - stage: test
       script: "docker-compose run -e CI=true e2e_test"
+      name: "e2e_test"
     - script: "docker-compose run -e CI=true app_test"
+      name: "app_test"
     - script: "docker-compose run -e CI=true server_test"
+      name: "server_test"  
     - script: "docker-compose run -e CI=true cypress"
+      name: "cypress"  
 
 before_cache:
   - mkdir -p $HOME/docker && docker images -a --filter='reference=*frontmania*' --filter='dangling=false'
