@@ -28,10 +28,15 @@ install:
 
 jobs:
   include:
+    # - stage: build docker image
+    #   script:
+    #   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+    #   - docker-compose build
+    #   - docker images
+    #   - docker tag frontmania_app $DOCKER_USERNAME/frontmania_app
+    #   - docker push $DOCKER_USERNAME/frontmania_app
     - stage: test
-      script: docker-compose build
-    - script: docker-compose up -d server app mock_build mock_server
-    - script: "docker-compose run -e CI=true e2e_test"
+      script: "docker-compose run -e CI=true e2e_test"
     - script: "docker-compose run -e CI=true app_test"
     - script: "docker-compose run -e CI=true server_test"
     - script: "docker-compose run -e CI=true cypress"

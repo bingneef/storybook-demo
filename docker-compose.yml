@@ -43,9 +43,7 @@ services:
       yarn docker:test:integration"
   # App
   app_base: &app_base
-    build:
-      context: ./app
-      dockerfile: ./Dockerfile
+    image: bingneef/jstest
     working_dir: /app
     volumes:
       - ./app:/app
