@@ -5,12 +5,6 @@ node_js:
 
 dist: trusty
 
-env:
-  - TEST_SUITE=e2e_test
-  - TEST_SUITE=app_test
-  - TEST_SUITE=server_test
-  - TEST_SUITE=cypress
-
 cache:
   directories:
   - "$HOME/docker"
@@ -35,6 +29,7 @@ install:
 jobs:
   include:
     - stage: pre_build
+      script: docker-compose build
       script: docker-compose up -d server app mock_build mock_server
 
     - stage: test
@@ -42,7 +37,7 @@ jobs:
       script: "docker-compose run -e CI=true app_test"
       script: "docker-compose run -e CI=true server_test"
       script: "docker-compose run -e CI=true cypress"
-      
+
     - stage: after_build
       script: docker-compose down
 
