@@ -51,8 +51,6 @@ services:
       - storybook:storybook
     depends_on:
       - storybook
-    environment:
-      - CI=true
     command: >
       sh -c "yarn install &&
       yarn docker:test"
