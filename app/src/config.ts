@@ -33,6 +33,4 @@ const environments: { [key: string]: Constants } = {
 
 const key = process.env.REACT_APP_MOCK_API === 'true' ? 'mock' : process.env.NODE_ENV;
 
-console.log(key);
-
 export default environments[key] || environments.development;

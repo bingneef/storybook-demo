@@ -14,7 +14,6 @@ import { SubscriptionServer } from 'subscriptions-transport-ws'
 import { addMockFunctionsToSchema, MockList } from 'graphql-tools';
 import schema from './src/services/graphql/schema/index'
 
-console.log('test');
 import constants from './src/config/constants'
 import logger from './src/services/logger'
 

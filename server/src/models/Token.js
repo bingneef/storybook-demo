@@ -19,7 +19,6 @@ class TokenClass {
 }
 
 TokenSchema.pre('save', function (next) {
-  console.log(this.token);
   if (!this.token) {
     this.token = crypto.randomBytes(20).toString('hex')
   }

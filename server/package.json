@@ -6,7 +6,7 @@
   "scripts": {
     "start": "yarn nodemon ./app.js --exec babel-node -e js",
     "docker": "docker-compose run --rm --service-ports web",
-    "test": "jest -i",
+    "test": "jest",
     "db:seed": "yarn babel-node src/db/seeds.js --exec babel-node",
     "runner": "yarn babel-node src/db/runner.js --exec babel-node"
   },
